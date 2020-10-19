@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改规格表')" />
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-specification-edit" th:object="${proSpecification}">
+        <input name="specId" th:field="*{specId}" type="hidden">
+        <div class="form-group">
+            <label class="col-sm-2 control-label is-required">型号：</label>
+            <div class="col-sm-8">
+                <input name="specModelno" th:field="*{specModelno}" class="form-control" type="text" readonly="readonly" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">简述中文：</label>
+            <div class="col-sm-8">
+                <textarea name="specDescribesC" class="form-control">[[*{specDescribesC}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">简述英文：</label>
+            <div class="col-sm-8">
+                <textarea name="specDescribesE" class="form-control">[[*{specDescribesE}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">简介中文：</label>
+            <div class="col-sm-8">
+                <textarea name="specIntroduceC" class="form-control">[[*{specIntroduceC}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">简介英文：</label>
+            <div class="col-sm-8">
+                <textarea name="specIntroduceE" class="form-control">[[*{specIntroduceE}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">特性中文：</label>
+            <div class="col-sm-8">
+                <textarea name="specCharactorC" class="form-control">[[*{specCharactorC}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">特性英文：</label>
+            <div class="col-sm-8">
+                <textarea name="specCharactorE" class="form-control">[[*{specCharactorE}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  >系统：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "select1"  onchange='getSpecName("select1","selectSystem")'>
+                    <option value="">--请选择搭载的系统--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '1'" th:value="${ps.specpId}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "selectSystem">
+                    <option value="">--请选择搭载的系统属性--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" name="number1" id="number1" oninput="value=value.replace(/[^\d]/g,'')" placeholder="数量">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark1" id="remark1" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue5("select1","selectSystem","number1","remark1","text1")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("text1")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecSystem" class="form-control" id="text1" style="height:150px;">[[*{specSpecSystem}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  >外部接口：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "selectSpecExternalioClass" onchange='getSpecName("selectSpecExternalioClass","selectSpecExternalio")'>
+                    <option value="">--请选择支持的外部接口类别--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '2'" th:value="${ps.specpId}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "selectSpecExternalio">
+                    <option value="">--请选择支持的外部接口--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" name="numberSpecExternalio" id="numberSpecExternalio" oninput="value=value.replace(/[^\d]/g,'')" placeholder="数量">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remarkSpecExternalio" id="remarkSpecExternalio" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue5("selectSpecExternalioClass","selectSpecExternalio","numberSpecExternalio","remarkSpecExternalio","textSpecExternalio")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("textSpecExternalio")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecExternalio" class="form-control" id="textSpecExternalio" style="height:150px;">[[*{specSpecExternalio}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  >内部接口：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "selectSpecInternalioClass" onchange='getSpecName("selectSpecInternalioClass","selectSpecInternalio")'>
+                    <option value="">--请选择支持的内部接口类别--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '2'" th:value="${ps.specpId}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "selectSpecInternalio">
+                    <option value="">--请选择支持的内部接口--</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" name="numberSpecInternalio" id="numberSpecInternalio" oninput="value=value.replace(/[^\d]/g,'')" placeholder="数量">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remarkSpecInternalio" id="remarkSpecInternalio" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue5("selectSpecInternalioClass","selectSpecInternalio","numberSpecInternalio","remarkSpecInternalio","textSpecInternalio")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("textSpecInternalio")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecInternalio" class="form-control" id="textSpecInternalio" style="height:150px;">[[*{specSpecInternalio}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">环境：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "select3" >
+                    <option value="">--请选择支持的环境--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '3'" th:value="${ps.specpName}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="number3" id="number3" placeholder="例：0℃~60℃">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark3" id="remark3" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue4("select3","number3","remark3","text3")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("text3")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecEnvironment" class="form-control" id="text3" style="height:150px;">[[*{specSpecEnvironment}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  >电源：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "select4">
+                    <option value="">--请选择支持的电源--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '4'" th:value="${ps.specpName}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="number4" id="number4" placeholder="100~240v">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark4" id="remark4" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue4("select4","number4","remark4","text4")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("text4")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecPower" class="form-control" id="text4" style="height:100px;">[[*{specSpecPower}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">机构：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "select5" >
+                    <option value="">--请选择支持的机构--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '5'" th:value="${ps.specpName}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="number5" id="number5" placeholder="例：SGCC">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark5" id="remark5" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue4("select5","number5","remark5","text5")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("text5")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecMechanical" class="form-control" id="text5" style="height:100px;">[[*{specSpecMechanical}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">认证：</label>
+            <div class="col-sm-3">
+                <select  class="form-control" id = "select6" >
+                    <option value="">--请选择支持的认证--</option>
+                    <option th:each="ps:${proSpecPropertyList}" th:if="${ps.specpParentid} eq '6'" th:value="${ps.specpName}" th:text="${ps.specpName}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="number6" id="number6" placeholder="例：CCC">
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="remark6" id="remark6" placeholder="备注">
+            </div>
+            <div>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='addValue4("select6","number6","remark6","text6")' ><i class="fa fa-check"></i>添加</a>
+                <a class="btn btn-white btn-rounded btn-sm"  onclick='clearValue("text6")' ><i class="fa fa-deaf"></i>清空</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"  ></label>
+            <div class="col-sm-8">
+                <textarea name="specSpecSafety" class="form-control" id="text6" style="height:100px;">[[*{specSpecSafety}]]</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">配置：</label>
+            <div class="col-sm-8">
+                <textarea name="specConfiguration" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">订购清单：</label>
+            <div class="col-sm-8">
+                <textarea name="specOrdering" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">注明中文：</label>
+            <div class="col-sm-8">
+                <textarea name="specPsC" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">注明英文：</label>
+            <div class="col-sm-8">
+                <textarea name="specPsE" class="form-control"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "production/specification"
+    $("#form-specification-edit").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/edit", $('#form-specification-edit').serialize());
+        }
+    };
+
+    function addValue5(selectId_1,selectId_2,numberId,remarkId,textId){
+        var selectObj1 = document.getElementById(selectId_1);
+        var selectObj2 = document.getElementById(selectId_2);
+        var numberObj = document.getElementById(numberId).value;
+        if(numberObj.length>=1){
+            numberObj=numberObj+" x ";
+        }
+        var remarkObj = document.getElementById(remarkId).value;
+        if(remarkObj.length>=1){
+            remarkObj="("+remarkObj+")";
+        }
+        var selectId_1index = selectObj1.selectedIndex;
+        var selectId_1text = selectObj1.options[selectId_1index].text+"：";
+        var selectId_2index = selectObj2.selectedIndex;
+        var selectId_2value = selectObj2.options[selectId_2index].value;
+        var value = selectId_1text + numberObj  + selectId_2value+remarkObj;
+
+        if(selectObj1.options[selectId_1index].value.length >= 1 && selectId_2value.length >= 1){
+            var textObj = document.getElementById(textId);
+            textObj.value += value+"\n";
+        }
+    };
+
+    function addValue4(selectId,numberId,remarkId,textId){
+        var selectObj = document.getElementById(selectId);
+        var numberObj = document.getElementById(numberId).value;
+        var remarkObj = document.getElementById(remarkId).value;
+        if(remarkObj.length>=1){
+            remarkObj="("+remarkObj+")";
+        }
+        var index = selectObj.selectedIndex;
+        var value = selectObj.options[index].value +"："+ numberObj + remarkObj;
+
+        if(selectObj.options[index].value.length >= 1){
+            var textObj = document.getElementById(textId);
+            textObj.value += value+"\n";
+        }
+    };
+
+    function clearValue(clearid){
+        var textObj = document.getElementById(clearid);
+        textObj.value = "";
+    };
+
+    //系统，外部接口，内部接口
+    function getSpecName(selectId_1,selectId_2){
+        //定位id
+        var selectObj1 = document.getElementById(selectId_1);
+        //选中索引
+        var index = selectObj1.selectedIndex;
+        //选中值
+        var value = selectObj1.options[index].value;
+        var optionJson = [];
+
+        $.ajax({
+            url: prefix + "/selectSpecInterfaceByParentId",
+            type: "post",
+            data: {"parent_id":value},
+            datatype:"json",
+            success:function(data){
+                optionJson = data;
+                var a = data.length;
+                var selectObj = document.getElementById(selectId_2);  //"fitFuclass1"是id值
+                selectObj.options.length = 0;
+                selectObj.options.add(new Option("--请选择支持的规格--",""),"");
+                for(var i = 0;i < data.length;i++){
+                    selectObj.options.add(new Option(optionJson[i].specpName,optionJson[i].specpName));
+                }
+            }
+        });
+    };
+
+</script>
+</body>
+</html>

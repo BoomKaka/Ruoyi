@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('规格详细')" />
+	<th:block th:include="include :: jsonview-css" />
+</head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m-t" id="signupForm">
+		<input id="sizeId" type="hidden" th:value="${proSize.sizeId}" >
+		<table id="tableId" class="table col-sm-12"  border="0" style="white-space:pre-wrap; word-wrap:break-word">
+			<tr>
+				<td colspan="2"><strong th:text ="${proSize.sizeModelno}" style="color: #0d8ddb; font-size: 30px"></strong></td>
+				<td><img src="http://localhost:80/img/EnnoconnLogo.png" align = right height="35px"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border-bottom-style: solid" border="4"><span>嵌入式工业主板CEB系列</span></td>
+				<td align="right" style="border-bottom-style: solid" border="4"><span>400-868-0008/www.ennoconn.com.cn </span></td>
+			</tr>
+			<tr>
+				<td  colspan="3"><span><strong style="color: #0d8ddb; font-size: 20px">· 简述 </strong></span></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeDescribesC}"></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeDescribesE}" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td width=30%></td>
+				<td width=40%></td>
+				<td width=30%></td></tr>
+			<tr>
+				<td colspan="3"><span><strong style="color: #0d8ddb; font-size: 20px">· 简介 </strong></span></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeIntroduceC}"></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeIntroduceE}" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr></tr>
+			<tr>
+				<td colspan="3"><span><strong style="color: #0d8ddb; font-size: 20px">· 特性 </strong></span></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeCharactorC}"></td>
+			</tr>
+			<tr>
+				<td colspan="3" th:text="${proSize.sizeCharactorE}" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr></tr>
+			<tr>
+				<td colspan="3"><span><strong style="color: #0d8ddb; font-size: 20px">· 规格</strong></span></td>
+			</tr>
+			<tr >
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff;">处理器 Processor</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecProcessor}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr th:style="${proSize.sizeSpecChipset=='' ? 'display:none':'display:table-row'}">
+			    <td  bgcolor="#0d8ddb"><span style="color: #f2fbff;">芯片组 Chipset</span></td>
+			    <td colspan="2" th:text="${proSize.sizeSpecChipset}" style="color:#000000" bgcolor="#f2f2f2"></td>
+		    </tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">内存 Memory</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecMemory}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">存储 Storage</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecStorage}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb" ><span style="color: #f2fbff">显示 Display</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecDisplay}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb" ><span style="color: #f2fbff">网口 Ethernet</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecEthernet}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">音频 Audio</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecAudio}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">BIOS</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecBios}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">外部接口 Rear I/O</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecReario}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">内部接口 Internal I/O</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecInternalio}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">扩展接口 Expansion</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecExpansion}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">显示 Display</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecDisplay}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">环境 Environment</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecEnvironment}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">电源输入 PowerInput</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecPowerinput}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">尺寸 Dimensions</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecDimension}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr>
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">操作系统 OS</span></td>
+				<td colspan="2" th:text="${proSize.sizeSpecOs}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+			<tr th:style="${proSize.sizeConfiguration=='' ? 'display:none':'display:table-row'}">
+				<td bgcolor="#0d8ddb"><span style="color: #f2fbff">安规认证</span></td>
+				<td colspan="2" th:text="${proSize.sizeConfiguration}" style="color:#000000" bgcolor="#f2f2f2"></td>
+			</tr>
+		</table>
+	</form>
+    </div>
+	<div class="row">
+		<div class="col-sm-offset-5 col-sm-10">
+        	<a>导出表格</a>
+			<a class="statistics-download" onclick="upload('upload')">导出成excel表格</a>
+		</div>
+	</div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: jsonview-js" />
+	<script>
+		// 使用outerHTML属性获取整个table元素的HTML代码（包括<table>标签），然后包装成一个完整的HTML文档，设置charset为urf-8以防止中文乱码
+		var html = "<html><head><meta charset='utf-8' /></head><body>" + document.getElementsByTagName("table")[0].outerHTML + "</body></html>";
+		// 实例化一个Blob对象，其构造函数的第一个参数是包含文件内容的数组，第二个参数是包含文件类型属性的对象
+		var blob = new Blob([html], { type: "application/vnd.ms-excel" });
+		var a = document.getElementsByTagName("a")[0];
+		// 利用URL.createObjectURL()方法为a元素生成blob URL
+		a.href = URL.createObjectURL(blob);
+		// 设置文件名
+		a.download = "嵌入式工业主板.xls";
+
+		var idTmr;
+
+		function getExplorer() {
+			var explorer = window.navigator.userAgent;
+			//ie
+			if (explorer.indexOf("MSIE") >= 0) {
+				return 'ie';
+			}
+			//firefox
+			else if (explorer.indexOf("Firefox") >= 0) {
+				return 'Firefox';
+			}
+			//Chrome
+			else if (explorer.indexOf("Chrome") >= 0) {
+				return 'Chrome';
+			}
+			//Opera
+			else if (explorer.indexOf("Opera") >= 0) {
+				return 'Opera';
+			}
+			//Safari
+			else if (explorer.indexOf("Safari") >= 0) {
+				return 'Safari';
+			}
+		}
+
+		function upload(tableid,name="1.xlsx") { //整个表格拷贝到EXCEL中
+			alert("下载数据（方法2）");
+			if (getExplorer() == 'ie') {
+				var curTbl = document.getElementById(tableid);
+				var oXL = new ActiveXObject("Excel.Application");
+
+				//创建AX对象excel
+				var oWB = oXL.Workbooks.Add();
+				//获取workbook对象
+				var xlsheet = oWB.Worksheets(1);
+				//激活当前sheet
+				var sel = document.body.createTextRange();
+				sel.moveToElementText(curTbl);
+				//把表格中的内容移到TextRange中
+				sel.select;
+				//全选TextRange中内容
+				sel.execCommand("Copy");
+				//复制TextRange中内容
+				xlsheet.Paste();
+				//粘贴到活动的EXCEL中
+				oXL.Visible = true;
+				//设置excel可见属性
+
+				try {
+					var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+				} catch (e) {
+					print("Nested catch caught " + e);
+				} finally {
+					oWB.SaveAs(fname);
+
+					oWB.Close(savechanges = false);
+					//xls.visible = false;
+					oXL.Quit();
+					oXL = null;
+					//结束excel进程，退出完成
+					//window.setInterval("Cleanup();",1);
+					idTmr = window.setInterval("Cleanup();", 1);
+
+				}
+
+			} else {
+				tableToExcel(tableid)
+			}
+		}
+
+		function Cleanup() {
+			window.clearInterval(idTmr);
+			CollectGarbage();
+		}
+		var tableToExcel = (function () {
+			var uri = 'data:application/vnd.ms-excel;base64,',
+					template =
+							'<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
+							'<head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions>' +
+							'<x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->' +
+							'</head><body><table>{table}</table></body></html>',
+					base64 = function (s) {
+						return window.btoa(unescape(encodeURIComponent(s)))
+					},
+					format = function (s, c) {
+						return s.replace(/{(\w+)}/g,
+								function (m, p) {
+									return c[p];
+								})
+					}
+			return function (table) {
+				if (!table.nodeType) table = document.getElementById("tableId");
+				var ctx = {
+					worksheet: name || 'Worksheet',
+					table: table.innerHTML
+				}
+				$('.statistics-download').attr('href',uri + base64(format(template, ctx)));
+				$('.statistics-download').attr('download',"嵌入式CEB.xls");
+			}
+		})();
+
+	</script>
+
+<!--	<script>-->
+<!--		var prefix = ctx + "production/size";-->
+<!--		function exportSizeExcel(){-->
+<!--			var sizeId = document.getElementById("sizeId").value;-->
+<!--			$.ajax({-->
+<!--				url: prefix + "/exportSizeExcel",-->
+<!--				type: "post",-->
+<!--				data: {"proSizeId":sizeId},-->
+<!--				datatype:"json",-->
+<!--				success:function (data){-->
+<!--					var msg = data;-->
+<!--					alert(msg);-->
+<!--				}-->
+<!--			})-->
+<!--		}-->
+
+<!--	</script>-->
+
+</body>
+</html>

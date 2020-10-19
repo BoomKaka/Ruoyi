@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProProductionMapper">
+
+    <resultMap type="ProProduction" id="ProProductionResult">
+        <result property="proId"    column="pro_id"    />
+        <result property="proClass"    column="pro_class"    />
+        <result property="proType"    column="pro_type"    />
+        <result property="proDecribes"    column="pro_decribes"    />
+        <result property="proProCpu"    column="pro_pro_cpu"    />
+        <result property="proProMemory"    column="pro_pro_memory"    />
+        <result property="proProStorage1"    column="pro_pro_storage1"    />
+        <result property="proProStorage2"    column="pro_pro_storage2"    />
+        <result property="proProOther"    column="pro_pro_other"    />
+        <result property="proProBaremodelno"    column="pro_pro_bareModelNo"    />
+        <result property="proProCompmodelno"    column="pro_pro_compModelNO"    />
+        <result property="proProPrice1"    column="pro_pro_price_1"    />
+        <result property="proProPrice2"    column="pro_pro_price_2"    />
+        <result property="proProPrice3"    column="pro_pro_price_3"    />
+        <result property="proProPrice4"    column="pro_pro_price_4"    />
+        <result property="proProBelongto"    column="pro_pro_belongTo"    />
+        <result property="proCost"    column="pro_cost"    />
+        <result property="proCostIncludetax"    column="pro_cost_includeTax"    />
+        <result property="proReverse"    column="pro_reverse"    />
+        <result property="proProGp1"    column="pro_pro_GP_1"    />
+        <result property="proProGp2"    column="pro_pro_GP_2"    />
+        <result property="proProGp3"    column="pro_pro_GP_3"    />
+        <result property="proProGp4"    column="pro_pro_GP_4"    />
+        <result property="proFitSubclass"    column="pro_fit_subClass"    />
+        <result property="proFitEnnomodelno"    column="pro_fit_ennoModelNO"    />
+        <result property="proFitPartnumber"    column="pro_fit_partNumber"    />
+        <result property="proFitMqq"    column="pro_fit_MQQ"    />
+        <result property="proFitPrice"    column="pro_fit_price"    />
+        <result property="proFitPriceincludetax"    column="pro_fit_priceIncludeTax"    />
+        <result property="proFitNomove"    column="pro_fit_NoMove"    />
+        <result property="proFitGp"    column="pro_fit_GP"    />
+        <result property="proFitSupplier"    column="pro_fit_supplier"    />
+        <result property="proFitSupppartnumber"    column="pro_fit_suppPartNumber"    />
+        <result property="proFitOther"    column="pro_fit_other"    />
+        <result property="proFitPn"    column="pro_fit_Pn"    />
+        <result property="proFitFanprice"    column="pro_fit_FanPrice"    />
+        <result property="proFitFanprice1"    column="pro_fit_fanprice1"    />
+        <result property="proFitFancost"    column="pro_fit_fanCost"    />
+        <result property="proFitManufacturntax"    column="pro_fit_manufacturnTax"    />
+        <result property="proFitCosttax"    column="pro_fit_costTax"    />
+        <result property="proFitFangp"    column="pro_fit_fanGP"    />
+        <result property="proUpdate"    column="pro_update"    />
+    </resultMap>
+
+    <sql id="selectProProductionVo">
+        select pro_id, pro_class, pro_type, pro_decribes, pro_pro_cpu, pro_pro_memory, pro_pro_storage1, pro_pro_storage2, pro_pro_other, pro_pro_bareModelNo, pro_pro_compModelNO, pro_pro_price_1, pro_pro_price_2, pro_pro_price_3, pro_pro_price_4, pro_pro_belongTo, pro_cost, pro_cost_includeTax, pro_reverse, pro_pro_GP_1, pro_pro_GP_2, pro_pro_GP_3, pro_pro_GP_4, pro_fit_subClass, pro_fit_ennoModelNO, pro_fit_partNumber, pro_fit_MQQ, pro_fit_price, pro_fit_priceIncludeTax, pro_fit_NoMove, pro_fit_GP, pro_fit_supplier, pro_fit_suppPartNumber, pro_fit_other, pro_fit_Pn, pro_fit_FanPrice, pro_fit_fanprice1, pro_fit_fanCost, pro_fit_manufacturnTax, pro_fit_costTax, pro_fit_fanGP, pro_update from pro_production
+    </sql>
+
+    <select id="queryProductionClassList" resultMap="ProProductionResult">
+        select distinct pro_class from pro_production
+    </select>
+
+    <select id="queryProductionTypeList" resultMap="ProProductionResult">
+        <include refid="selectProProductionVo"/>
+        where pro_class = #{selectedClass}
+    </select>
+
+    <update id="execSql" parameterType="String">
+        update pro_production set ${data}
+    </update>
+
+<!--    <update id="saveMath" parameterType="String">-->
+<!--        update pro_formula set ${needSave}-->
+<!--    </update>-->
+
+<!--    <update id="updateInsertByFormula" parameterType="String">-->
+<!--        update pro_production set ${math8}-->
+<!--    </update>-->
+
+    <update id="saveFormula" parameterType="String">
+        update pro_formula set ${sqlInsert};
+    </update>
+
+<!--    <select id = "selectProFormulaById" parameterType="Long" resultMap="com.ruoyi.formula.mapper.ProFormulaMapper.ProFormulaResult">-->
+<!--        select for_id, for_class, for_type, for_decribes, for_pro_cpu, for_pro_memory, for_pro_storage1, for_pro_storage2, for_pro_other, for_pro_bareModelNo, for_pro_compModelNO, for_pro_price_1, for_pro_price_2, for_pro_price_3, for_pro_price_4, for_pro_belongTo, for_cost, for_cost_includeTax, for_reverse, for_pro_GP_1, for_pro_GP_2, for_pro_GP_3, for_pro_GP_4, for_fit_subClass, for_fit_ennoModelNO, for_fit_partNumber, for_fit_MQQ, for_fit_price, for_fit_priceIncludeTax, for_fit_NoMove, for_fit_GP, for_fit_supplier, for_fit_suppPartNumber, for_fit_other, for_fit_Pn, for_fit_FanPrice, for_fit_fanprice1, for_fit_fanCost, for_fit_manufacturnTax, for_fit_costTax, for_fit_fanGP, for_exchangeRate, for_taxRate, for_update from pro_formula-->
+<!--        where for_id = #{id}-->
+<!--    </select>-->
+
+<!--    <select id="selectProSizeByBaremodelno" parameterType="String" resultMap="com.ruoyi.production.mapper.ProSizeMapper.ProSizeResult">-->
+<!--        select size_id, size_modelNO, size_describes_C, size_describes_E, size_introduce_C, size_introduce_E, size_charactor_C, size_charactor_E, size_spec_Processor, size_spec_Chipset, size_spec_Memory, size_spec_Storage, size_spec_Display, size_spec_Ethernet, size_spec_Audio, size_spec_BIOS, size_spec_RearIO, size_spec_InternalIO, size_spec_Expansion, size_spec_Environment, size_spec_PowerInput, size_spec_Dimension, size_spec_OS, size_spec_TPM, size_spec_Safety, size_configuration, size_ordering, size_ps_C, size_ps_E from pro_size-->
+<!--        where size_modelNO like concat('%', #{proProBaremodelno}, '%')-->
+<!--    </select>-->
+
+
+<!--    <select id="selectProSizeById" parameterType="Long" resultMap="com.ruoyi.production.mapper.ProSizeMapper.ProSizeResult">-->
+<!--        select size_id, size_modelNO, size_describes_C, size_describes_E, size_introduce_C, size_introduce_E, size_charactor_C, size_charactor_E, size_spec_Processor, size_spec_Chipset, size_spec_Memory, size_spec_Storage, size_spec_Display, size_spec_Ethernet, size_spec_Audio, size_spec_BIOS, size_spec_RearIO, size_spec_InternalIO, size_spec_Expansion, size_spec_Environment, size_spec_PowerInput, size_spec_Dimension, size_spec_OS, size_spec_TPM, size_spec_Safety, size_configuration, size_ordering, size_ps_C, size_ps_E from pro_size-->
+<!--        where size_id = #{id}-->
+<!--    </select>-->
+
+    <select id="selectProProductionList" parameterType="ProProduction" resultMap="ProProductionResult">
+        <include refid="selectProProductionVo"/>
+        <where>
+            <if test="proClass != null  and proClass != ''"> and pro_class like concat('%', #{proClass}, '%')</if>
+            <if test="proType != null  and proType != ''"> and pro_type = #{proType}</if>
+            <if test="proProCpu != null  and proProCpu != ''"> and pro_pro_cpu like concat('%', #{proProCpu}, '%')</if>
+            <if test="proProMemory != null  and proProMemory != ''"> and pro_pro_memory like concat('%', #{proProMemory}, '%')</if>
+            <if test="proProBaremodelno != null  and proProBaremodelno != ''"> and pro_pro_bareModelNo like concat('%', #{proProBaremodelno}, '%')</if>
+            <if test="proProCompmodelno != null  and proProCompmodelno != ''"> and pro_pro_compModelNO like concat('%', #{proProCompmodelno}, '%')</if>
+            <if test="proFitSubclass != null  and proFitSubclass != ''"> and pro_fit_subClass = #{proFitSubclass}</if>
+            <if test="proFitEnnomodelno != null  and proFitEnnomodelno != ''"> and pro_fit_ennoModelNO like concat('%', #{proFitEnnomodelno}, '%')</if>
+            <if test="proFitPartnumber != null  and proFitPartnumber != ''"> and pro_fit_partNumber like concat('%', #{proFitPartnumber}, '%')</if>
+            <if test="proFitSupplier != null  and proFitSupplier != ''"> and pro_fit_supplier like concat('%', #{proFitSupplier}, '%')</if>
+            <if test="proFitSupppartnumber != null  and proFitSupppartnumber != ''"> and pro_fit_suppPartNumber like concat('%', #{proFitSupppartnumber}, '%')</if>
+            <if test="params.beginProUpdate != null and params.beginProUpdate != '' and params.endProUpdate != null and params.endProUpdate != ''"> and pro_update between #{params.beginProUpdate} and #{params.endProUpdate}</if>
+        </where>
+    </select>
+
+    <select id="selectProProductionById" parameterType="Long" resultMap="ProProductionResult">
+        <include refid="selectProProductionVo"/>
+        where pro_id = #{proId}
+    </select>
+
+    <insert id="insertProProduction" parameterType="ProProduction" useGeneratedKeys="true" keyProperty="proId">
+        insert into pro_production
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="proClass != null">pro_class,</if>
+            <if test="proType != null">pro_type,</if>
+            <if test="proDecribes != null">pro_decribes,</if>
+            <if test="proProCpu != null">pro_pro_cpu,</if>
+            <if test="proProMemory != null">pro_pro_memory,</if>
+            <if test="proProStorage1 != null">pro_pro_storage1,</if>
+            <if test="proProStorage2 != null">pro_pro_storage2,</if>
+            <if test="proProOther != null">pro_pro_other,</if>
+            <if test="proProBaremodelno != null">pro_pro_bareModelNo,</if>
+            <if test="proProCompmodelno != null">pro_pro_compModelNO,</if>
+            <if test="proProPrice1 != null">pro_pro_price_1,</if>
+            <if test="proProPrice2 != null">pro_pro_price_2,</if>
+            <if test="proProPrice3 != null">pro_pro_price_3,</if>
+            <if test="proProPrice4 != null">pro_pro_price_4,</if>
+            <if test="proProBelongto != null">pro_pro_belongTo,</if>
+            <if test="proCost != null">pro_cost,</if>
+            <if test="proCostIncludetax != null">pro_cost_includeTax,</if>
+            <if test="proReverse != null">pro_reverse,</if>
+            <if test="proProGp1 != null">pro_pro_GP_1,</if>
+            <if test="proProGp2 != null">pro_pro_GP_2,</if>
+            <if test="proProGp3 != null">pro_pro_GP_3,</if>
+            <if test="proProGp4 != null">pro_pro_GP_4,</if>
+            <if test="proFitSubclass != null">pro_fit_subClass,</if>
+            <if test="proFitEnnomodelno != null">pro_fit_ennoModelNO,</if>
+            <if test="proFitPartnumber != null">pro_fit_partNumber,</if>
+            <if test="proFitMqq != null">pro_fit_MQQ,</if>
+            <if test="proFitPrice != null">pro_fit_price,</if>
+            <if test="proFitPriceincludetax != null">pro_fit_priceIncludeTax,</if>
+            <if test="proFitNomove != null">pro_fit_NoMove,</if>
+            <if test="proFitGp != null">pro_fit_GP,</if>
+            <if test="proFitSupplier != null">pro_fit_supplier,</if>
+            <if test="proFitSupppartnumber != null">pro_fit_suppPartNumber,</if>
+            <if test="proFitOther != null">pro_fit_other,</if>
+            <if test="proFitPn != null">pro_fit_Pn,</if>
+            <if test="proFitFanprice != null">pro_fit_FanPrice,</if>
+            <if test="proFitFanprice1 != null">pro_fit_fanprice1,</if>
+            <if test="proFitFancost != null">pro_fit_fanCost,</if>
+            <if test="proFitManufacturntax != null">pro_fit_manufacturnTax,</if>
+            <if test="proFitCosttax != null">pro_fit_costTax,</if>
+            <if test="proFitFangp != null">pro_fit_fanGP,</if>
+            <if test="proUpdate != null">pro_update,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="proClass != null">#{proClass},</if>
+            <if test="proType != null">#{proType},</if>
+            <if test="proDecribes != null">#{proDecribes},</if>
+            <if test="proProCpu != null">#{proProCpu},</if>
+            <if test="proProMemory != null">#{proProMemory},</if>
+            <if test="proProStorage1 != null">#{proProStorage1},</if>
+            <if test="proProStorage2 != null">#{proProStorage2},</if>
+            <if test="proProOther != null">#{proProOther},</if>
+            <if test="proProBaremodelno != null">#{proProBaremodelno},</if>
+            <if test="proProCompmodelno != null">#{proProCompmodelno},</if>
+            <if test="proProPrice1 != null">#{proProPrice1},</if>
+            <if test="proProPrice2 != null">#{proProPrice2},</if>
+            <if test="proProPrice3 != null">#{proProPrice3},</if>
+            <if test="proProPrice4 != null">#{proProPrice4},</if>
+            <if test="proProBelongto != null">#{proProBelongto},</if>
+            <if test="proCost != null">#{proCost},</if>
+            <if test="proCostIncludetax != null">#{proCostIncludetax},</if>
+            <if test="proReverse != null">#{proReverse},</if>
+            <if test="proProGp1 != null">#{proProGp1},</if>
+            <if test="proProGp2 != null">#{proProGp2},</if>
+            <if test="proProGp3 != null">#{proProGp3},</if>
+            <if test="proProGp4 != null">#{proProGp4},</if>
+            <if test="proFitSubclass != null">#{proFitSubclass},</if>
+            <if test="proFitEnnomodelno != null">#{proFitEnnomodelno},</if>
+            <if test="proFitPartnumber != null">#{proFitPartnumber},</if>
+            <if test="proFitMqq != null">#{proFitMqq},</if>
+            <if test="proFitPrice != null">#{proFitPrice},</if>
+            <if test="proFitPriceincludetax != null">#{proFitPriceincludetax},</if>
+            <if test="proFitNomove != null">#{proFitNomove},</if>
+            <if test="proFitGp != null">#{proFitGp},</if>
+            <if test="proFitSupplier != null">#{proFitSupplier},</if>
+            <if test="proFitSupppartnumber != null">#{proFitSupppartnumber},</if>
+            <if test="proFitOther != null">#{proFitOther},</if>
+            <if test="proFitPn != null">#{proFitPn},</if>
+            <if test="proFitFanprice != null">#{proFitFanprice},</if>
+            <if test="proFitFanprice1 != null">#{proFitFanprice1},</if>
+            <if test="proFitFancost != null">#{proFitFancost},</if>
+            <if test="proFitManufacturntax != null">#{proFitManufacturntax},</if>
+            <if test="proFitCosttax != null">#{proFitCosttax},</if>
+            <if test="proFitFangp != null">#{proFitFangp},</if>
+            <if test="proUpdate != null">#{proUpdate},</if>
+        </trim>
+    </insert>
+
+    <update id="updateProProduction" parameterType="ProProduction">
+        update pro_production
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="proClass != null">pro_class = #{proClass},</if>
+            <if test="proType != null">pro_type = #{proType},</if>
+            <if test="proDecribes != null">pro_decribes = #{proDecribes},</if>
+            <if test="proProCpu != null">pro_pro_cpu = #{proProCpu},</if>
+            <if test="proProMemory != null">pro_pro_memory = #{proProMemory},</if>
+            <if test="proProStorage1 != null">pro_pro_storage1 = #{proProStorage1},</if>
+            <if test="proProStorage2 != null">pro_pro_storage2 = #{proProStorage2},</if>
+            <if test="proProOther != null">pro_pro_other = #{proProOther},</if>
+            <if test="proProBaremodelno != null">pro_pro_bareModelNo = #{proProBaremodelno},</if>
+            <if test="proProCompmodelno != null">pro_pro_compModelNO = #{proProCompmodelno},</if>
+            <if test="proProPrice1 != null">pro_pro_price_1 = #{proProPrice1},</if>
+            <if test="proProPrice2 != null">pro_pro_price_2 = #{proProPrice2},</if>
+            <if test="proProPrice3 != null">pro_pro_price_3 = #{proProPrice3},</if>
+            <if test="proProPrice4 != null">pro_pro_price_4 = #{proProPrice4},</if>
+            <if test="proProBelongto != null">pro_pro_belongTo = #{proProBelongto},</if>
+            <if test="proCost != null">pro_cost = #{proCost},</if>
+            <if test="proCostIncludetax != null">pro_cost_includeTax = #{proCostIncludetax},</if>
+            <if test="proReverse != null">pro_reverse = #{proReverse},</if>
+            <if test="proProGp1 != null">pro_pro_GP_1 = #{proProGp1},</if>
+            <if test="proProGp2 != null">pro_pro_GP_2 = #{proProGp2},</if>
+            <if test="proProGp3 != null">pro_pro_GP_3 = #{proProGp3},</if>
+            <if test="proProGp4 != null">pro_pro_GP_4 = #{proProGp4},</if>
+            <if test="proFitSubclass != null">pro_fit_subClass = #{proFitSubclass},</if>
+            <if test="proFitEnnomodelno != null">pro_fit_ennoModelNO = #{proFitEnnomodelno},</if>
+            <if test="proFitPartnumber != null">pro_fit_partNumber = #{proFitPartnumber},</if>
+            <if test="proFitMqq != null">pro_fit_MQQ = #{proFitMqq},</if>
+            <if test="proFitPrice != null">pro_fit_price = #{proFitPrice},</if>
+            <if test="proFitPriceincludetax != null">pro_fit_priceIncludeTax = #{proFitPriceincludetax},</if>
+            <if test="proFitNomove != null">pro_fit_NoMove = #{proFitNomove},</if>
+            <if test="proFitGp != null">pro_fit_GP = #{proFitGp},</if>
+            <if test="proFitSupplier != null">pro_fit_supplier = #{proFitSupplier},</if>
+            <if test="proFitSupppartnumber != null">pro_fit_suppPartNumber = #{proFitSupppartnumber},</if>
+            <if test="proFitOther != null">pro_fit_other = #{proFitOther},</if>
+            <if test="proFitPn != null">pro_fit_Pn = #{proFitPn},</if>
+            <if test="proFitFanprice != null">pro_fit_FanPrice = #{proFitFanprice},</if>
+            <if test="proFitFanprice1 != null">pro_fit_fanprice1 = #{proFitFanprice1},</if>
+            <if test="proFitFancost != null">pro_fit_fanCost = #{proFitFancost},</if>
+            <if test="proFitManufacturntax != null">pro_fit_manufacturnTax = #{proFitManufacturntax},</if>
+            <if test="proFitCosttax != null">pro_fit_costTax = #{proFitCosttax},</if>
+            <if test="proFitFangp != null">pro_fit_fanGP = #{proFitFangp},</if>
+            <if test="proUpdate != null">pro_update = #{proUpdate},</if>
+        </trim>
+        where pro_id = #{proId}
+    </update>
+
+    <delete id="deleteProProductionById" parameterType="Long">
+        delete from pro_production where pro_id = #{proId}
+    </delete>
+
+    <delete id="deleteProProductionByIds" parameterType="String">
+        delete from pro_production where pro_id in
+        <foreach item="proId" collection="array" open="(" separator="," close=")">
+            #{proId}
+        </foreach>
+    </delete>
+
+
+    <select id="selectProType" resultMap="ProProductionResult">
+        select distinct pro_type from pro_production
+        where pro_type !="" and pro_class like concat('%', #{proClass}, '%')
+    </select>
+
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProSizeMapper">
+    
+    <resultMap type="ProSize" id="ProSizeResult">
+        <result property="sizeId"    column="size_id"    />
+        <result property="sizeModelno"    column="size_modelNO"    />
+        <result property="sizeDescribesC"    column="size_describes_C"    />
+        <result property="sizeDescribesE"    column="size_describes_E"    />
+        <result property="sizeIntroduceC"    column="size_introduce_C"    />
+        <result property="sizeIntroduceE"    column="size_introduce_E"    />
+        <result property="sizeCharactorC"    column="size_charactor_C"    />
+        <result property="sizeCharactorE"    column="size_charactor_E"    />
+        <result property="sizeSpecProcessor"    column="size_spec_Processor"    />
+        <result property="sizeSpecChipset"    column="size_spec_Chipset"    />
+        <result property="sizeSpecMemory"    column="size_spec_Memory"    />
+        <result property="sizeSpecStorage"    column="size_spec_Storage"    />
+        <result property="sizeSpecDisplay"    column="size_spec_Display"    />
+        <result property="sizeSpecEthernet"    column="size_spec_Ethernet"    />
+        <result property="sizeSpecAudio"    column="size_spec_Audio"    />
+        <result property="sizeSpecBios"    column="size_spec_BIOS"    />
+        <result property="sizeSpecReario"    column="size_spec_RearIO"    />
+        <result property="sizeSpecInternalio"    column="size_spec_InternalIO"    />
+        <result property="sizeSpecExpansion"    column="size_spec_Expansion"    />
+        <result property="sizeSpecEnvironment"    column="size_spec_Environment"    />
+        <result property="sizeSpecPowerinput"    column="size_spec_PowerInput"    />
+        <result property="sizeSpecDimension"    column="size_spec_Dimension"    />
+        <result property="sizeSpecOs"    column="size_spec_OS"    />
+        <result property="sizeSpecTpm"    column="size_spec_TPM"    />
+        <result property="sizeSpecSafety"    column="size_spec_Safety"    />
+        <result property="sizeConfiguration"    column="size_configuration"    />
+        <result property="sizeOrdering"    column="size_ordering"    />
+        <result property="sizePsC"    column="size_ps_C"    />
+        <result property="sizePsE"    column="size_ps_E"    />
+    </resultMap>
+
+    <sql id="selectProSizeVo">
+        select size_id, size_modelNO, size_describes_C, size_describes_E, size_introduce_C, size_introduce_E, size_charactor_C, size_charactor_E, size_spec_Processor, size_spec_Chipset, size_spec_Memory, size_spec_Storage, size_spec_Display, size_spec_Ethernet, size_spec_Audio, size_spec_BIOS, size_spec_RearIO, size_spec_InternalIO, size_spec_Expansion, size_spec_Environment, size_spec_PowerInput, size_spec_Dimension, size_spec_OS, size_spec_TPM, size_spec_Safety, size_configuration, size_ordering, size_ps_C, size_ps_E from pro_size
+    </sql>
+
+    <select id="selectProSizeList" parameterType="ProSize" resultMap="ProSizeResult">
+        <include refid="selectProSizeVo"/>
+        <where>  
+            <if test="sizeModelno != null  and sizeModelno != ''"> and size_modelNO like concat('%', #{sizeModelno}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectProSizeByModelNo" parameterType="String" resultMap="ProSizeResult">
+        <include refid="selectProSizeVo"></include>
+        where size_modelNO = #{sizeModelno}
+    </select>
+
+    <select id="selectProSizeById" parameterType="Long" resultMap="ProSizeResult">
+        <include refid="selectProSizeVo"/>
+        where size_id = #{sizeId}
+    </select>
+        
+    <insert id="insertProSize" parameterType="ProSize" useGeneratedKeys="true" keyProperty="sizeId">
+        insert into pro_size
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sizeModelno != null and sizeModelno != ''">size_modelNO,</if>
+            <if test="sizeDescribesC != null">size_describes_C,</if>
+            <if test="sizeDescribesE != null">size_describes_E,</if>
+            <if test="sizeIntroduceC != null">size_introduce_C,</if>
+            <if test="sizeIntroduceE != null">size_introduce_E,</if>
+            <if test="sizeCharactorC != null">size_charactor_C,</if>
+            <if test="sizeCharactorE != null">size_charactor_E,</if>
+            <if test="sizeSpecProcessor != null">size_spec_Processor,</if>
+            <if test="sizeSpecChipset != null">size_spec_Chipset,</if>
+            <if test="sizeSpecMemory != null">size_spec_Memory,</if>
+            <if test="sizeSpecStorage != null">size_spec_Storage,</if>
+            <if test="sizeSpecDisplay != null">size_spec_Display,</if>
+            <if test="sizeSpecEthernet != null">size_spec_Ethernet,</if>
+            <if test="sizeSpecAudio != null">size_spec_Audio,</if>
+            <if test="sizeSpecBios != null">size_spec_BIOS,</if>
+            <if test="sizeSpecReario != null">size_spec_RearIO,</if>
+            <if test="sizeSpecInternalio != null">size_spec_InternalIO,</if>
+            <if test="sizeSpecExpansion != null">size_spec_Expansion,</if>
+            <if test="sizeSpecEnvironment != null">size_spec_Environment,</if>
+            <if test="sizeSpecPowerinput != null">size_spec_PowerInput,</if>
+            <if test="sizeSpecDimension != null">size_spec_Dimension,</if>
+            <if test="sizeSpecOs != null">size_spec_OS,</if>
+            <if test="sizeSpecTpm != null">size_spec_TPM,</if>
+            <if test="sizeSpecSafety != null">size_spec_Safety,</if>
+            <if test="sizeConfiguration != null">size_configuration,</if>
+            <if test="sizeOrdering != null">size_ordering,</if>
+            <if test="sizePsC != null">size_ps_C,</if>
+            <if test="sizePsE != null">size_ps_E,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sizeModelno != null and sizeModelno != ''">#{sizeModelno},</if>
+            <if test="sizeDescribesC != null">#{sizeDescribesC},</if>
+            <if test="sizeDescribesE != null">#{sizeDescribesE},</if>
+            <if test="sizeIntroduceC != null">#{sizeIntroduceC},</if>
+            <if test="sizeIntroduceE != null">#{sizeIntroduceE},</if>
+            <if test="sizeCharactorC != null">#{sizeCharactorC},</if>
+            <if test="sizeCharactorE != null">#{sizeCharactorE},</if>
+            <if test="sizeSpecProcessor != null">#{sizeSpecProcessor},</if>
+            <if test="sizeSpecChipset != null">#{sizeSpecChipset},</if>
+            <if test="sizeSpecMemory != null">#{sizeSpecMemory},</if>
+            <if test="sizeSpecStorage != null">#{sizeSpecStorage},</if>
+            <if test="sizeSpecDisplay != null">#{sizeSpecDisplay},</if>
+            <if test="sizeSpecEthernet != null">#{sizeSpecEthernet},</if>
+            <if test="sizeSpecAudio != null">#{sizeSpecAudio},</if>
+            <if test="sizeSpecBios != null">#{sizeSpecBios},</if>
+            <if test="sizeSpecReario != null">#{sizeSpecReario},</if>
+            <if test="sizeSpecInternalio != null">#{sizeSpecInternalio},</if>
+            <if test="sizeSpecExpansion != null">#{sizeSpecExpansion},</if>
+            <if test="sizeSpecEnvironment != null">#{sizeSpecEnvironment},</if>
+            <if test="sizeSpecPowerinput != null">#{sizeSpecPowerinput},</if>
+            <if test="sizeSpecDimension != null">#{sizeSpecDimension},</if>
+            <if test="sizeSpecOs != null">#{sizeSpecOs},</if>
+            <if test="sizeSpecTpm != null">#{sizeSpecTpm},</if>
+            <if test="sizeSpecSafety != null">#{sizeSpecSafety},</if>
+            <if test="sizeConfiguration != null">#{sizeConfiguration},</if>
+            <if test="sizeOrdering != null">#{sizeOrdering},</if>
+            <if test="sizePsC != null">#{sizePsC},</if>
+            <if test="sizePsE != null">#{sizePsE},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProSize" parameterType="ProSize">
+        update pro_size
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sizeModelno != null and sizeModelno != ''">size_modelNO = #{sizeModelno},</if>
+            <if test="sizeDescribesC != null">size_describes_C = #{sizeDescribesC},</if>
+            <if test="sizeDescribesE != null">size_describes_E = #{sizeDescribesE},</if>
+            <if test="sizeIntroduceC != null">size_introduce_C = #{sizeIntroduceC},</if>
+            <if test="sizeIntroduceE != null">size_introduce_E = #{sizeIntroduceE},</if>
+            <if test="sizeCharactorC != null">size_charactor_C = #{sizeCharactorC},</if>
+            <if test="sizeCharactorE != null">size_charactor_E = #{sizeCharactorE},</if>
+            <if test="sizeSpecProcessor != null">size_spec_Processor = #{sizeSpecProcessor},</if>
+            <if test="sizeSpecChipset != null">size_spec_Chipset = #{sizeSpecChipset},</if>
+            <if test="sizeSpecMemory != null">size_spec_Memory = #{sizeSpecMemory},</if>
+            <if test="sizeSpecStorage != null">size_spec_Storage = #{sizeSpecStorage},</if>
+            <if test="sizeSpecDisplay != null">size_spec_Display = #{sizeSpecDisplay},</if>
+            <if test="sizeSpecEthernet != null">size_spec_Ethernet = #{sizeSpecEthernet},</if>
+            <if test="sizeSpecAudio != null">size_spec_Audio = #{sizeSpecAudio},</if>
+            <if test="sizeSpecBios != null">size_spec_BIOS = #{sizeSpecBios},</if>
+            <if test="sizeSpecReario != null">size_spec_RearIO = #{sizeSpecReario},</if>
+            <if test="sizeSpecInternalio != null">size_spec_InternalIO = #{sizeSpecInternalio},</if>
+            <if test="sizeSpecExpansion != null">size_spec_Expansion = #{sizeSpecExpansion},</if>
+            <if test="sizeSpecEnvironment != null">size_spec_Environment = #{sizeSpecEnvironment},</if>
+            <if test="sizeSpecPowerinput != null">size_spec_PowerInput = #{sizeSpecPowerinput},</if>
+            <if test="sizeSpecDimension != null">size_spec_Dimension = #{sizeSpecDimension},</if>
+            <if test="sizeSpecOs != null">size_spec_OS = #{sizeSpecOs},</if>
+            <if test="sizeSpecTpm != null">size_spec_TPM = #{sizeSpecTpm},</if>
+            <if test="sizeSpecSafety != null">size_spec_Safety = #{sizeSpecSafety},</if>
+            <if test="sizeConfiguration != null">size_configuration = #{sizeConfiguration},</if>
+            <if test="sizeOrdering != null">size_ordering = #{sizeOrdering},</if>
+            <if test="sizePsC != null">size_ps_C = #{sizePsC},</if>
+            <if test="sizePsE != null">size_ps_E = #{sizePsE},</if>
+        </trim>
+        where size_id = #{sizeId}
+    </update>
+
+    <delete id="deleteProSizeById" parameterType="Long">
+        delete from pro_size where size_id = #{sizeId}
+    </delete>
+
+    <delete id="deleteProSizeByIds" parameterType="String">
+        delete from pro_size where size_id in 
+        <foreach item="sizeId" collection="array" open="(" separator="," close=")">
+            #{sizeId}
+        </foreach>
+    </delete>
+
+</mapper>

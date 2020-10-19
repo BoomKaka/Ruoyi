@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改裸机')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-bare-edit" th:object="${proBare}">
+            <input name="bareId" th:field="*{bareId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">分类：</label>
+                <div class="col-sm-8">
+                    <input name="bareClass" th:field="*{bareClass}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">类型：</label>
+                <div class="col-sm-8">
+                    <input name="bareType" th:field="*{bareType}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">CPU/芯片：</label>
+                <div class="col-sm-8">
+                    <input name="bareCpu" th:field="*{bareCpu}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">产品简述：</label>
+                <div class="col-sm-8">
+                    <input name="bareDescribe" th:field="*{bareDescribe}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">裸机型号：</label>
+                <div class="col-sm-8">
+                    <input name="bareBareModel" th:field="*{bareBareModel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">台北：</label>
+                <div class="col-sm-8">
+                    <input name="barePrice1" th:field="*{barePrice1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">白金：</label>
+                <div class="col-sm-8">
+                    <input name="barePrice2" th:field="*{barePrice2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">专营：</label>
+                <div class="col-sm-8">
+                    <input name="barePrice3" th:field="*{barePrice3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">特约：</label>
+                <div class="col-sm-8">
+                    <input name="barePrice4" th:field="*{barePrice4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">所属：</label>
+                <div class="col-sm-8">
+                    <input name="bareBelong" th:field="*{bareBelong}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">cost：</label>
+                <div class="col-sm-8">
+                    <input name="bareCost" th:field="*{bareCost}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">成本(含税)：</label>
+                <div class="col-sm-8">
+                    <input name="bareCostTax" th:field="*{bareCostTax}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">GP-台北：</label>
+                <div class="col-sm-8">
+                    <input name="bareGp1" th:field="*{bareGp1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">GP-白金：</label>
+                <div class="col-sm-8">
+                    <input name="bareGp2" th:field="*{bareGp2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">GP-专营：</label>
+                <div class="col-sm-8">
+                    <input name="bareGp3" th:field="*{bareGp3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">GP-特约：</label>
+                <div class="col-sm-8">
+                    <input name="bareGp4" th:field="*{bareGp4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve" th:field="*{bareReserve}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留1：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve1" th:field="*{bareReserve1}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留2：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve2" th:field="*{bareReserve2}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留3：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve3" th:field="*{bareReserve3}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留4：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve4" th:field="*{bareReserve4}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">预留5：</label>
+                <div class="col-sm-8">
+                    <input name="bareReserve5" th:field="*{bareReserve5}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "production/bare";
+        $("#form-bare-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-bare-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

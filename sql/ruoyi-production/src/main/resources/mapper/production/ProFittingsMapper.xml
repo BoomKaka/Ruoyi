@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProFittingsMapper">
+    
+    <resultMap type="ProFittings" id="ProFittingsResult">
+        <result property="fittingsId"    column="fittings_id"    />
+        <result property="fitMainclass"    column="fit_mainClass"    />
+        <result property="fitFuclass"    column="fit_fuClass"    />
+        <result property="fitEnnoModel"    column="fit_enno_model"    />
+        <result property="fitItemno"    column="fit_itemNo"    />
+        <result property="fitMqq"    column="fit_MQQ"    />
+        <result property="fitPrice"    column="fit_price"    />
+        <result property="fitPriceTax"    column="fit_price_tax"    />
+        <result property="fitDescribe"    column="fit_describe"    />
+        <result property="fitUpdate"    column="fit_update"    />
+        <result property="fitCost"    column="fit_cost"    />
+        <result property="fitCostTax"    column="fit_cost_tax"    />
+        <result property="fitNochange"    column="fit_noChange"    />
+        <result property="fitReserve"    column="fit_reserve"    />
+        <result property="fitGp"    column="fit_GP"    />
+        <result property="fitSupplier"    column="fit_supplier"    />
+        <result property="fitSuppItemno"    column="fit_supp_itemNO"    />
+        <result property="fitOther"    column="fit_other"    />
+        <result property="fitPn"    column="fit_Pn"    />
+        <result property="fitFanePrice"    column="fit_fanE_price"    />
+        <result property="fitFancPrice"    column="fit_fanC_price"    />
+        <result property="fitCostOther"    column="fit_cost_other"    />
+        <result property="fitManufacturerrate"    column="fit_manufacturerRate"    />
+        <result property="fitCosttaxOther"    column="fit_costTax_other"    />
+        <result property="fitGpOther"    column="fit_GP_other"    />
+        <result property="fitReserve1"    column="fit_reserve_1"    />
+        <result property="fitReserve2"    column="fit_reserve_2"    />
+        <result property="fitReserve3"    column="fit_reserve_3"    />
+        <result property="fitReserve4"    column="fit_reserve_4"    />
+        <result property="fitReserve5"    column="fit_reserve_5"    />
+    </resultMap>
+
+    <sql id="selectProFittingsVo">
+        select fittings_id, fit_mainClass, fit_fuClass, fit_enno_model, fit_itemNo, fit_MQQ, fit_price, fit_price_tax, fit_describe, fit_update, fit_cost, fit_cost_tax, fit_noChange, fit_reserve, fit_GP, fit_supplier, fit_supp_itemNO, fit_other, fit_Pn, fit_fanE_price, fit_fanC_price, fit_cost_other, fit_manufacturerRate, fit_costTax_other, fit_GP_other, fit_reserve_1, fit_reserve_2, fit_reserve_3, fit_reserve_4, fit_reserve_5 from pro_fittings
+    </sql>
+
+    <select id="selectProFittingsList" parameterType="ProFittings" resultMap="ProFittingsResult">
+        <include refid="selectProFittingsVo"/>
+        <where>  
+            <if test="fitMainclass != null  and fitMainclass != ''"> and fit_mainClass like concat('%', #{fitMainclass}, '%')</if>
+            <if test="fitFuclass != null  and fitFuclass != ''"> and fit_fuClass like concat('%', #{fitFuclass}, '%')</if>
+            <if test="fitEnnoModel != null  and fitEnnoModel != ''"> and fit_enno_model = #{fitEnnoModel}</if>
+            <if test="fitItemno != null  and fitItemno != ''"> and fit_itemNo = #{fitItemno}</if>
+            <if test="fitSupplier != null  and fitSupplier != ''"> and fit_supplier = #{fitSupplier}</if>
+        </where>
+    </select>
+
+    <select id="selectfitMainclass" resultMap="ProFittingsResult">
+        select distinct fit_mainClass from pro_fittings
+    </select>
+    <select id="selectfitFuclass" parameterType="String" resultMap="ProFittingsResult">
+--         select distinct fit_fuClass from pro_fittings
+        <include refid="selectProFittingsVo"></include>
+        where fit_mainClass = #{fitMainclass}
+    </select>
+
+    <select id="selectProFittingsByEnnoModel" parameterType="String" resultMap="ProFittingsResult">
+        <include refid="selectProFittingsVo"></include>
+        where fit_enno_model = #{fitEnnoModel}
+    </select>
+
+    
+    <select id="selectProFittingsById" parameterType="Integer" resultMap="ProFittingsResult">
+        <include refid="selectProFittingsVo"/>
+        where fittings_id = #{fittingsId}
+    </select>
+        
+    <insert id="insertProFittings" parameterType="ProFittings" useGeneratedKeys="true" keyProperty="fittingsId">
+        insert into pro_fittings
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fitMainclass != null">fit_mainClass,</if>
+            <if test="fitFuclass != null">fit_fuClass,</if>
+            <if test="fitEnnoModel != null">fit_enno_model,</if>
+            <if test="fitItemno != null">fit_itemNo,</if>
+            <if test="fitMqq != null">fit_MQQ,</if>
+            <if test="fitPrice != null">fit_price,</if>
+            <if test="fitPriceTax != null">fit_price_tax,</if>
+            <if test="fitDescribe != null">fit_describe,</if>
+            <if test="fitUpdate != null">fit_update,</if>
+            <if test="fitCost != null">fit_cost,</if>
+            <if test="fitCostTax != null">fit_cost_tax,</if>
+            <if test="fitNochange != null">fit_noChange,</if>
+            <if test="fitReserve != null">fit_reserve,</if>
+            <if test="fitGp != null">fit_GP,</if>
+            <if test="fitSupplier != null">fit_supplier,</if>
+            <if test="fitSuppItemno != null">fit_supp_itemNO,</if>
+            <if test="fitOther != null">fit_other,</if>
+            <if test="fitPn != null">fit_Pn,</if>
+            <if test="fitFanePrice != null">fit_fanE_price,</if>
+            <if test="fitFancPrice != null">fit_fanC_price,</if>
+            <if test="fitCostOther != null">fit_cost_other,</if>
+            <if test="fitManufacturerrate != null">fit_manufacturerRate,</if>
+            <if test="fitCosttaxOther != null">fit_costTax_other,</if>
+            <if test="fitGpOther != null">fit_GP_other,</if>
+            <if test="fitReserve1 != null">fit_reserve_1,</if>
+            <if test="fitReserve2 != null">fit_reserve_2,</if>
+            <if test="fitReserve3 != null">fit_reserve_3,</if>
+            <if test="fitReserve4 != null">fit_reserve_4,</if>
+            <if test="fitReserve5 != null">fit_reserve_5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fitMainclass != null">#{fitMainclass},</if>
+            <if test="fitFuclass != null">#{fitFuclass},</if>
+            <if test="fitEnnoModel != null">#{fitEnnoModel},</if>
+            <if test="fitItemno != null">#{fitItemno},</if>
+            <if test="fitMqq != null">#{fitMqq},</if>
+            <if test="fitPrice != null">#{fitPrice},</if>
+            <if test="fitPriceTax != null">#{fitPriceTax},</if>
+            <if test="fitDescribe != null">#{fitDescribe},</if>
+            <if test="fitUpdate != null">#{fitUpdate},</if>
+            <if test="fitCost != null">#{fitCost},</if>
+            <if test="fitCostTax != null">#{fitCostTax},</if>
+            <if test="fitNochange != null">#{fitNochange},</if>
+            <if test="fitReserve != null">#{fitReserve},</if>
+            <if test="fitGp != null">#{fitGp},</if>
+            <if test="fitSupplier != null">#{fitSupplier},</if>
+            <if test="fitSuppItemno != null">#{fitSuppItemno},</if>
+            <if test="fitOther != null">#{fitOther},</if>
+            <if test="fitPn != null">#{fitPn},</if>
+            <if test="fitFanePrice != null">#{fitFanePrice},</if>
+            <if test="fitFancPrice != null">#{fitFancPrice},</if>
+            <if test="fitCostOther != null">#{fitCostOther},</if>
+            <if test="fitManufacturerrate != null">#{fitManufacturerrate},</if>
+            <if test="fitCosttaxOther != null">#{fitCosttaxOther},</if>
+            <if test="fitGpOther != null">#{fitGpOther},</if>
+            <if test="fitReserve1 != null">#{fitReserve1},</if>
+            <if test="fitReserve2 != null">#{fitReserve2},</if>
+            <if test="fitReserve3 != null">#{fitReserve3},</if>
+            <if test="fitReserve4 != null">#{fitReserve4},</if>
+            <if test="fitReserve5 != null">#{fitReserve5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProFittings" parameterType="ProFittings" >
+        update pro_fittings
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fitMainclass != null">fit_mainClass = #{fitMainclass},</if>
+            <if test="fitFuclass != null">fit_fuClass = #{fitFuclass},</if>
+            <if test="fitEnnoModel != null">fit_enno_model = #{fitEnnoModel},</if>
+            <if test="fitItemno != null">fit_itemNo = #{fitItemno},</if>
+            <if test="fitMqq != null">fit_MQQ = #{fitMqq},</if>
+            <if test="fitPrice != null">fit_price = #{fitPrice},</if>
+            <if test="fitPriceTax != null">fit_price_tax = #{fitPriceTax},</if>
+            <if test="fitDescribe != null">fit_describe = #{fitDescribe},</if>
+            <if test="fitUpdate != null">fit_update = #{fitUpdate},</if>
+            <if test="fitCost != null">fit_cost = #{fitCost},</if>
+            <if test="fitCostTax != null">fit_cost_tax = #{fitCostTax},</if>
+            <if test="fitNochange != null">fit_noChange = #{fitNochange},</if>
+            <if test="fitReserve != null">fit_reserve = #{fitReserve},</if>
+            <if test="fitGp != null">fit_GP = #{fitGp},</if>
+            <if test="fitSupplier != null">fit_supplier = #{fitSupplier},</if>
+            <if test="fitSuppItemno != null">fit_supp_itemNO = #{fitSuppItemno},</if>
+            <if test="fitOther != null">fit_other = #{fitOther},</if>
+            <if test="fitPn != null">fit_Pn = #{fitPn},</if>
+            <if test="fitFanePrice != null">fit_fanE_price = #{fitFanePrice},</if>
+            <if test="fitFancPrice != null">fit_fanC_price = #{fitFancPrice},</if>
+            <if test="fitCostOther != null">fit_cost_other = #{fitCostOther},</if>
+            <if test="fitManufacturerrate != null">fit_manufacturerRate = #{fitManufacturerrate},</if>
+            <if test="fitCosttaxOther != null">fit_costTax_other = #{fitCosttaxOther},</if>
+            <if test="fitGpOther != null">fit_GP_other = #{fitGpOther},</if>
+            <if test="fitReserve1 != null">fit_reserve_1 = #{fitReserve1},</if>
+            <if test="fitReserve2 != null">fit_reserve_2 = #{fitReserve2},</if>
+            <if test="fitReserve3 != null">fit_reserve_3 = #{fitReserve3},</if>
+            <if test="fitReserve4 != null">fit_reserve_4 = #{fitReserve4},</if>
+            <if test="fitReserve5 != null">fit_reserve_5 = #{fitReserve5},</if>
+        </trim>
+        where fittings_id = #{fittingsId}
+    </update>
+
+    <update id="updateProFittingsByEnnoModel" parameterType="ProFittings" >
+        update pro_fittings
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fitMainclass != null">fit_mainClass = #{fitMainclass},</if>
+            <if test="fitFuclass != null">fit_fuClass = #{fitFuclass},</if>
+<!--            <if test="fitEnnoModel != null">fit_enno_model = #{fitEnnoModel},</if>-->
+            <if test="fitItemno != null">fit_itemNo = #{fitItemno},</if>
+            <if test="fitMqq != null">fit_MQQ = #{fitMqq},</if>
+            <if test="fitPrice != null">fit_price = #{fitPrice},</if>
+            <if test="fitPriceTax != null">fit_price_tax = #{fitPriceTax},</if>
+            <if test="fitDescribe != null">fit_describe = #{fitDescribe},</if>
+            <if test="fitUpdate != null">fit_update = #{fitUpdate},</if>
+            <if test="fitCost != null">fit_cost = #{fitCost},</if>
+            <if test="fitCostTax != null">fit_cost_tax = #{fitCostTax},</if>
+            <if test="fitNochange != null">fit_noChange = #{fitNochange},</if>
+            <if test="fitReserve != null">fit_reserve = #{fitReserve},</if>
+            <if test="fitGp != null">fit_GP = #{fitGp},</if>
+            <if test="fitSupplier != null">fit_supplier = #{fitSupplier},</if>
+            <if test="fitSuppItemno != null">fit_supp_itemNO = #{fitSuppItemno},</if>
+            <if test="fitOther != null">fit_other = #{fitOther},</if>
+            <if test="fitPn != null">fit_Pn = #{fitPn},</if>
+            <if test="fitFanePrice != null">fit_fanE_price = #{fitFanePrice},</if>
+            <if test="fitFancPrice != null">fit_fanC_price = #{fitFancPrice},</if>
+            <if test="fitCostOther != null">fit_cost_other = #{fitCostOther},</if>
+            <if test="fitManufacturerrate != null">fit_manufacturerRate = #{fitManufacturerrate},</if>
+            <if test="fitCosttaxOther != null">fit_costTax_other = #{fitCosttaxOther},</if>
+            <if test="fitGpOther != null">fit_GP_other = #{fitGpOther},</if>
+            <if test="fitReserve1 != null">fit_reserve_1 = #{fitReserve1},</if>
+            <if test="fitReserve2 != null">fit_reserve_2 = #{fitReserve2},</if>
+            <if test="fitReserve3 != null">fit_reserve_3 = #{fitReserve3},</if>
+            <if test="fitReserve4 != null">fit_reserve_4 = #{fitReserve4},</if>
+            <if test="fitReserve5 != null">fit_reserve_5 = #{fitReserve5},</if>
+        </trim>
+        where fit_enno_model = #{fitEnnoModel}
+    </update>
+
+    <delete id="deleteProFittingsById" parameterType="Integer">
+        delete from pro_fittings where fittings_id = #{fittingsId}
+    </delete>
+
+    <delete id="deleteProFittingsByIds" parameterType="String">
+        delete from pro_fittings where fittings_id in 
+        <foreach item="fittingsId" collection="array" open="(" separator="," close=")">
+            #{fittingsId}
+        </foreach>
+    </delete>
+
+</mapper>

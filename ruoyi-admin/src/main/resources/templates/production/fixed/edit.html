@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<head>
+    <th:block th:include="include :: header('修改公式')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-fixed-edit" th:object="${proFixed}">
+            <input name="fixedId" th:field="*{fixedId}" type="hidden">
+            <div class="form-group select-list">
+                <label class="col-sm-3 control-label">类型：</label>
+                <div class="col-sm-8">
+                    <select class="form-control m-b" th:name="checkClass" th:id="checkfixedClass">
+                        <option value=0>所有</option>
+                        <option value=1>固定值</option>
+                        <option value=2>公式</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">名称：</label>
+                <div class="col-sm-8">
+                    <input name="fixedName" th:field="*{fixedName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group" th:name="fixedValue" th:id="fixedValue">
+                <label class="col-sm-3 control-label">值：</label>
+                <div class="col-sm-8">
+                    <input name="fixedValue" th:field="*{fixedValue}" class="form-control" type="text">
+                </div>
+            </div>
+                <div class="form-group" th:name="fixedFormal" th:id="fixedFormal">
+                    <label class="col-sm-3 control-label">公式内容：</label>
+                    <div class="col-sm-8">
+                        <input name="fixedContext" th:field="*{fixedContext}" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group" th:id="fixedFormalTable">
+                <div class="list-group">
+                    <div class="col-sm-4">
+                        <table id="bootstrap-table1"></table>
+                    </div>
+                    <div class="col-sm-4">
+                        <table id="bootstrap-table2"></table>
+                    </div>
+                    <div class="col-sm-4">
+                        <table id="bootstrap-table3"></table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+        </div>
+    </div>
+
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "production/fixed";
+        $(function() {
+            var options = {
+                id: "bootstrap-table1",
+                url: prefix + "/column/list1",
+                modalName: "裸机表",
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                columns: [
+                    [{
+                        title : '裸机列信息',
+                        align : 'center',
+                        colspan : 2
+                    }],
+                    [{
+                        field: 'columnComment',
+                        title: '名称'
+                    },
+                    {
+                        field: 'columnName',
+                        title: '字段'
+                    }]
+                    ]
+            };
+            $.table.init(options);
+        });
+        $(function() {
+            var options = {
+                id: "bootstrap-table2",
+                url: prefix + "/column/list2",
+                modalName: "整机表",
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                columns: [
+                    [{
+                        title : '整机列信息',
+                        align : 'center',
+                        colspan : 2
+                    }],
+                    [{
+                        field: 'columnComment',
+                        title: '名称'
+                    },
+                    {
+                        field: 'columnName',
+                        title: '字段'
+                    }]
+                    ]
+            };
+            $.table.init(options);
+        });
+        $(function() {
+            var options = {
+                id: "bootstrap-table3",
+                url: prefix + "/column/list3",
+                modalName: "配件表",
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                columns: [
+                    [{
+                        title : '配件列信息',
+                        align : 'center',
+                        colspan : 2
+                    }],
+                    [{
+                        field: 'columnComment',
+                        title: '名称'
+                    },
+                    {
+                        field: 'columnName',
+                        title: '字段'
+                    }]
+                ]
+            };
+            $.table.init(options);
+        });
+
+
+        $("#form-fixed-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-fixed-edit').serialize());
+            }
+        }
+
+        $('#checkfixedClass').on("change",function () {
+            if (document.getElementById('checkfixedClass').value ==1){
+                $('#fixedValue').show();
+                $('#fixedFormal').hide();
+                $('#fixedFormalTable').hide();
+
+            }else if(document.getElementById('checkfixedClass').value ==2){
+                $('#fixedValue').hide();
+                $('#fixedFormal').show();
+                $('#fixedFormalTable').show();
+            }else{
+                $('#fixedValue').show();
+                $('#fixedFormal').show();
+                $('#fixedFormalTable').show();
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.product.mapper.ProBareMapper">
+    
+    <resultMap type="ProBare" id="ProBareResult">
+        <result property="bareId"    column="bare_id"    />
+        <result property="bareClass"    column="bare_class"    />
+        <result property="bareType"    column="bare_type"    />
+        <result property="bareCpu"    column="bare_cpu"    />
+        <result property="bareDescribe"    column="bare_describe"    />
+        <result property="bareBareModel"    column="bare_bare_model"    />
+        <result property="barePrice1"    column="bare_price_1"    />
+        <result property="barePrice2"    column="bare_price_2"    />
+        <result property="barePrice3"    column="bare_price_3"    />
+        <result property="barePrice4"    column="bare_price_4"    />
+        <result property="bareBelong"    column="bare_belong"    />
+        <result property="bareCost"    column="bare_cost"    />
+        <result property="bareCostTax"    column="bare_cost_tax"    />
+        <result property="bareGp1"    column="bare_GP_1"    />
+        <result property="bareGp2"    column="bare_GP_2"    />
+        <result property="bareGp3"    column="bare_GP_3"    />
+        <result property="bareGp4"    column="bare_GP_4"    />
+        <result property="bareReserve"    column="bare_reserve"    />
+        <result property="bareReserve1"    column="bare_reserve_1"    />
+        <result property="bareReserve2"    column="bare_reserve_2"    />
+        <result property="bareReserve3"    column="bare_reserve_3"    />
+        <result property="bareReserve4"    column="bare_reserve_4"    />
+        <result property="bareReserve5"    column="bare_reserve_5"    />
+    </resultMap>
+
+    <sql id="selectProBareVo">
+        select bare_id, bare_class, bare_type, bare_cpu, bare_describe, bare_bare_model, bare_price_1, bare_price_2, bare_price_3, bare_price_4, bare_belong, bare_cost, bare_cost_tax, bare_GP_1, bare_GP_2, bare_GP_3, bare_GP_4, bare_reserve, bare_reserve_1, bare_reserve_2, bare_reserve_3, bare_reserve_4, bare_reserve_5 from pro_bare
+    </sql>
+
+    <select id="selectProBareList" parameterType="ProBare" resultMap="ProBareResult">
+        <include refid="selectProBareVo"/>
+        <where>  
+            <if test="bareClass != null  and bareClass != ''"> and bare_class = #{bareClass}</if>
+            <if test="bareType != null  and bareType != ''"> and bare_type = #{bareType}</if>
+            <if test="bareCpu != null  and bareCpu != ''"> and bare_cpu = #{bareCpu}</if>
+            <if test="bareDescribe != null  and bareDescribe != ''"> and bare_describe = #{bareDescribe}</if>
+            <if test="bareBareModel != null  and bareBareModel != ''"> and bare_bare_model = #{bareBareModel}</if>
+            <if test="barePrice1 != null "> and bare_price_1 = #{barePrice1}</if>
+            <if test="barePrice2 != null "> and bare_price_2 = #{barePrice2}</if>
+            <if test="barePrice3 != null "> and bare_price_3 = #{barePrice3}</if>
+            <if test="barePrice4 != null "> and bare_price_4 = #{barePrice4}</if>
+            <if test="bareBelong != null  and bareBelong != ''"> and bare_belong = #{bareBelong}</if>
+            <if test="bareCost != null "> and bare_cost = #{bareCost}</if>
+            <if test="bareCostTax != null "> and bare_cost_tax = #{bareCostTax}</if>
+            <if test="bareGp1 != null "> and bare_GP_1 = #{bareGp1}</if>
+            <if test="bareGp2 != null "> and bare_GP_2 = #{bareGp2}</if>
+            <if test="bareGp3 != null "> and bare_GP_3 = #{bareGp3}</if>
+            <if test="bareGp4 != null "> and bare_GP_4 = #{bareGp4}</if>
+            <if test="bareReserve != null "> and bare_reserve = #{bareReserve}</if>
+            <if test="bareReserve1 != null  and bareReserve1 != ''"> and bare_reserve_1 = #{bareReserve1}</if>
+            <if test="bareReserve2 != null  and bareReserve2 != ''"> and bare_reserve_2 = #{bareReserve2}</if>
+            <if test="bareReserve3 != null  and bareReserve3 != ''"> and bare_reserve_3 = #{bareReserve3}</if>
+            <if test="bareReserve4 != null  and bareReserve4 != ''"> and bare_reserve_4 = #{bareReserve4}</if>
+            <if test="bareReserve5 != null  and bareReserve5 != ''"> and bare_reserve_5 = #{bareReserve5}</if>
+        </where>
+    </select>
+    
+    <select id="selectProBareById" parameterType="Integer" resultMap="ProBareResult">
+        <include refid="selectProBareVo"/>
+        where bare_id = #{bareId}
+    </select>
+        
+    <insert id="insertProBare" parameterType="ProBare" useGeneratedKeys="true" keyProperty="bareId">
+        insert into pro_bare
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bareClass != null">bare_class,</if>
+            <if test="bareType != null">bare_type,</if>
+            <if test="bareCpu != null">bare_cpu,</if>
+            <if test="bareDescribe != null">bare_describe,</if>
+            <if test="bareBareModel != null">bare_bare_model,</if>
+            <if test="barePrice1 != null">bare_price_1,</if>
+            <if test="barePrice2 != null">bare_price_2,</if>
+            <if test="barePrice3 != null">bare_price_3,</if>
+            <if test="barePrice4 != null">bare_price_4,</if>
+            <if test="bareBelong != null">bare_belong,</if>
+            <if test="bareCost != null">bare_cost,</if>
+            <if test="bareCostTax != null">bare_cost_tax,</if>
+            <if test="bareGp1 != null">bare_GP_1,</if>
+            <if test="bareGp2 != null">bare_GP_2,</if>
+            <if test="bareGp3 != null">bare_GP_3,</if>
+            <if test="bareGp4 != null">bare_GP_4,</if>
+            <if test="bareReserve != null">bare_reserve,</if>
+            <if test="bareReserve1 != null">bare_reserve_1,</if>
+            <if test="bareReserve2 != null">bare_reserve_2,</if>
+            <if test="bareReserve3 != null">bare_reserve_3,</if>
+            <if test="bareReserve4 != null">bare_reserve_4,</if>
+            <if test="bareReserve5 != null">bare_reserve_5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bareClass != null">#{bareClass},</if>
+            <if test="bareType != null">#{bareType},</if>
+            <if test="bareCpu != null">#{bareCpu},</if>
+            <if test="bareDescribe != null">#{bareDescribe},</if>
+            <if test="bareBareModel != null">#{bareBareModel},</if>
+            <if test="barePrice1 != null">#{barePrice1},</if>
+            <if test="barePrice2 != null">#{barePrice2},</if>
+            <if test="barePrice3 != null">#{barePrice3},</if>
+            <if test="barePrice4 != null">#{barePrice4},</if>
+            <if test="bareBelong != null">#{bareBelong},</if>
+            <if test="bareCost != null">#{bareCost},</if>
+            <if test="bareCostTax != null">#{bareCostTax},</if>
+            <if test="bareGp1 != null">#{bareGp1},</if>
+            <if test="bareGp2 != null">#{bareGp2},</if>
+            <if test="bareGp3 != null">#{bareGp3},</if>
+            <if test="bareGp4 != null">#{bareGp4},</if>
+            <if test="bareReserve != null">#{bareReserve},</if>
+            <if test="bareReserve1 != null">#{bareReserve1},</if>
+            <if test="bareReserve2 != null">#{bareReserve2},</if>
+            <if test="bareReserve3 != null">#{bareReserve3},</if>
+            <if test="bareReserve4 != null">#{bareReserve4},</if>
+            <if test="bareReserve5 != null">#{bareReserve5},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProBare" parameterType="ProBare">
+        update pro_bare
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bareClass != null">bare_class = #{bareClass},</if>
+            <if test="bareType != null">bare_type = #{bareType},</if>
+            <if test="bareCpu != null">bare_cpu = #{bareCpu},</if>
+            <if test="bareDescribe != null">bare_describe = #{bareDescribe},</if>
+            <if test="bareBareModel != null">bare_bare_model = #{bareBareModel},</if>
+            <if test="barePrice1 != null">bare_price_1 = #{barePrice1},</if>
+            <if test="barePrice2 != null">bare_price_2 = #{barePrice2},</if>
+            <if test="barePrice3 != null">bare_price_3 = #{barePrice3},</if>
+            <if test="barePrice4 != null">bare_price_4 = #{barePrice4},</if>
+            <if test="bareBelong != null">bare_belong = #{bareBelong},</if>
+            <if test="bareCost != null">bare_cost = #{bareCost},</if>
+            <if test="bareCostTax != null">bare_cost_tax = #{bareCostTax},</if>
+            <if test="bareGp1 != null">bare_GP_1 = #{bareGp1},</if>
+            <if test="bareGp2 != null">bare_GP_2 = #{bareGp2},</if>
+            <if test="bareGp3 != null">bare_GP_3 = #{bareGp3},</if>
+            <if test="bareGp4 != null">bare_GP_4 = #{bareGp4},</if>
+            <if test="bareReserve != null">bare_reserve = #{bareReserve},</if>
+            <if test="bareReserve1 != null">bare_reserve_1 = #{bareReserve1},</if>
+            <if test="bareReserve2 != null">bare_reserve_2 = #{bareReserve2},</if>
+            <if test="bareReserve3 != null">bare_reserve_3 = #{bareReserve3},</if>
+            <if test="bareReserve4 != null">bare_reserve_4 = #{bareReserve4},</if>
+            <if test="bareReserve5 != null">bare_reserve_5 = #{bareReserve5},</if>
+        </trim>
+        where bare_id = #{bareId}
+    </update>
+
+    <delete id="deleteProBareById" parameterType="Integer">
+        delete from pro_bare where bare_id = #{bareId}
+    </delete>
+
+    <delete id="deleteProBareByIds" parameterType="String">
+        delete from pro_bare where bare_id in 
+        <foreach item="bareId" collection="array" open="(" separator="," close=")">
+            #{bareId}
+        </foreach>
+    </delete>
+
+    <select id="selectBareByBareModel" parameterType="String" resultMap="ProBareResult">
+        <include refid="selectProBareVo"/>
+        where bare_bare_model = #{bareBareModel}
+    </select>
+</mapper>

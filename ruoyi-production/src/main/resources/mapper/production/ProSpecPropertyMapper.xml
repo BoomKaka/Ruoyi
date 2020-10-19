@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProSpecPropertyMapper">
+    
+    <resultMap type="ProSpecProperty" id="ProSpecPropertyResult">
+        <result property="specpId"    column="specp_id"    />
+        <result property="specpName"    column="specp_name"    />
+        <result property="specpParentid"    column="specp_parentId"    />
+        <result property="specpOrdernum"    column="specp_orderNum"    />
+        <result property="specpUnable"    column="specp_unable"    />
+        <result property="specpCreator"    column="specp_creator"    />
+        <result property="specpCreattime"    column="specp_creattime"    />
+        <result property="specpUpdatatime"    column="specp_updatatime"    />
+        <result property="parentName" column="parent_name" />
+    </resultMap>
+
+    <sql id="selectProSpecPropertyVo">
+        select specp_id, specp_name, specp_parentId, specp_orderNum, specp_unable, specp_creator, specp_creattime, specp_updatatime from pro_spec_property
+    </sql>
+
+    <select id="selectProSpecPropertyList" parameterType="ProSpecProperty" resultMap="ProSpecPropertyResult">
+        <include refid="selectProSpecPropertyVo"/>
+        <where>  
+            <if test="specpName != null  and specpName != ''"> and specp_name like concat('%', #{specpName}, '%')</if>
+        </where>
+        order by specp_parentId
+    </select>
+    
+    <select id="selectProSpecPropertyById" parameterType="Long" resultMap="ProSpecPropertyResult">
+        select t.specp_id, t.specp_name, t.specp_parentId, t.specp_orderNum, t.specp_unable, t.specp_creator, t.specp_creattime, t.specp_updatatime, p.specp_name as parent_name
+        from pro_spec_property t
+        left join pro_spec_property p on p.specp_id = t.specp_parentId
+        where t.specp_id = #{specpId}
+    </select>
+        
+    <insert id="insertProSpecProperty" parameterType="ProSpecProperty" useGeneratedKeys="true" keyProperty="specpId">
+        insert into pro_spec_property
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specpName != null">specp_name,</if>
+            <if test="specpParentid != null">specp_parentId,</if>
+            <if test="specpOrdernum != null">specp_orderNum,</if>
+            <if test="specpUnable != null">specp_unable,</if>
+            <if test="specpCreator != null">specp_creator,</if>
+            specp_creattime,
+            specp_updatatime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="specpName != null">#{specpName},</if>
+            <if test="specpParentid != null">#{specpParentid},</if>
+            <if test="specpOrdernum != null">#{specpOrdernum},</if>
+            <if test="specpUnable != null">#{specpUnable},</if>
+            <if test="specpCreator != null">#{specpCreator},</if>
+            <if test="specpCreattime != null">#{specpCreattime},</if>
+            <if test="specpUpdatatime != null">#{specpUpdatatime},</if>
+            sysdate(),
+            sysdate()
+         </trim>
+    </insert>
+
+    <update id="updateProSpecProperty" parameterType="ProSpecProperty">
+        update pro_spec_property
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="specpName != null">specp_name = #{specpName},</if>
+            <if test="specpParentid != null">specp_parentId = #{specpParentid},</if>
+            <if test="specpOrdernum != null">specp_orderNum = #{specpOrdernum},</if>
+            <if test="specpUnable != null">specp_unable = #{specpUnable},</if>
+            <if test="specpCreator != null">specp_creator = #{specpCreator},</if>
+            <if test="specpCreattime != null">specp_creattime = #{specpCreattime},</if>
+            specp_updatatime=sysdate()
+        </trim>
+        where specp_id = #{specpId}
+    </update>
+
+    <delete id="deleteProSpecPropertyById" parameterType="Long">
+        delete from pro_spec_property where specp_id = #{specpId}
+    </delete>
+
+    <delete id="deleteProSpecPropertyByIds" parameterType="String">
+        delete from pro_spec_property where specp_id in 
+        <foreach item="specpId" collection="array" open="(" separator="," close=")">
+            #{specpId}
+        </foreach>
+    </delete>
+
+    <select id="selectProSpecPropertyListByParentId" parameterType="Long" resultMap="ProSpecPropertyResult">
+        <include refid="selectProSpecPropertyVo"/>
+        where specp_parentId = #{specpParentid}
+        order by specp_parentId, specp_orderNum
+    </select>
+
+    <select id="selectProSpecPropertyByName" parameterType="ProSpecProperty" resultMap="ProSpecPropertyResult">
+        <include refid="selectProSpecPropertyVo"></include>
+        where specp_name = #{specpName}
+    </select>
+
+    <select id="selectSpecInterfaceNameByParentId" parameterType="Long" resultMap="ProSpecPropertyResult">
+        select specp_name
+        from pro_spec_property
+        where specp_parentId = #{specpParentid}
+    </select>
+
+</mapper>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.production.mapper.ProSpecificationMapper">
+    
+    <resultMap type="ProSpecification" id="ProSpecificationResult">
+        <result property="specId"    column="spec_id"    />
+        <result property="specClass"     column="spec_class"/>
+        <result property="specModelno"    column="spec_modelNO"    />
+        <result property="specDescribesC"    column="spec_describes_C"    />
+        <result property="specDescribesE"    column="spec_describes_E"    />
+        <result property="specIntroduceC"    column="spec_introduce_C"    />
+        <result property="specIntroduceE"    column="spec_introduce_E"    />
+        <result property="specCharactorC"    column="spec_charactor_C"    />
+        <result property="specCharactorE"    column="spec_charactor_E"    />
+        <result property="specSpecProcessor"    column="spec_spec_Processor"    />
+        <result property="specSpecChipset"    column="spec_spec_Chipset"    />
+        <result property="specSpecMemory"    column="spec_spec_Memory"    />
+        <result property="specSpecStorage"    column="spec_spec_Storage"    />
+        <result property="specSpecDisplay"    column="spec_spec_Display"    />
+        <result property="specSpecEthernet"    column="spec_spec_Ethernet"    />
+        <result property="specSpecAudio"    column="spec_spec_Audio"    />
+        <result property="specSpecBios"    column="spec_spec_BIOS"    />
+        <result property="specSpecExternalio"    column="spec_spec_ExternalIO"    />
+        <result property="specSpecInternalio"    column="spec_spec_InternalIO"    />
+        <result property="specSpecExpansion"    column="spec_spec_Expansion"    />
+        <result property="specSpecEnvironment"    column="spec_spec_Environment"    />
+        <result property="specSpecPower"    column="spec_spec_Power"    />
+        <result property="specSpecDimension"    column="spec_spec_Dimension"    />
+        <result property="specSpecTpm"    column="spec_spec_TPM"    />
+        <result property="specSpecOs"    column="spec_spec_OS"    />
+        <result property="specSpecSystem"    column="spec_spec_System"    />
+        <result property="specSpecMechanical"    column="spec_spec_Mechanical"    />
+        <result property="specSpecTouchscreen"    column="spec_spec_Touchscreen"    />
+        <result property="specSpecCea"    column="spec_spec_CEA"    />
+        <result property="specSpecSafety"    column="spec_spec_Safety"    />
+        <result property="specConfiguration"    column="spec_configuration"    />
+        <result property="specOrdering"    column="spec_ordering"    />
+        <result property="specPsC"    column="spec_ps_C"    />
+        <result property="specPsE"    column="spec_ps_E"    />
+    </resultMap>
+
+    <sql id="selectProSpecificationVo">
+        select spec_id, spec_class, spec_modelNO, spec_describes_C, spec_describes_E, spec_introduce_C, spec_introduce_E, spec_charactor_C, spec_charactor_E, spec_spec_Processor, spec_spec_Chipset, spec_spec_Memory, spec_spec_Storage, spec_spec_Display, spec_spec_Ethernet, spec_spec_Audio, spec_spec_BIOS, spec_spec_ExternalIO, spec_spec_InternalIO, spec_spec_Expansion, spec_spec_Environment, spec_spec_Power, spec_spec_Dimension, spec_spec_TPM, spec_spec_OS, spec_spec_System, spec_spec_Mechanical, spec_spec_Touchscreen, spec_spec_CEA, spec_spec_Safety, spec_configuration, spec_ordering, spec_ps_C, spec_ps_E from pro_specification
+    </sql>
+
+    <select id="selectProSpecificationList" parameterType="ProSpecification" resultMap="ProSpecificationResult">
+        <include refid="selectProSpecificationVo"/>
+        <where>  
+            <if test="specModelno != null  and specModelno != ''"> and spec_modelNO like concat('%', #{specModelno}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectProSpecByModelNo" parameterType="String" resultMap="ProSpecificationResult">
+        <include refid="selectProSpecificationVo"></include>
+        where spec_modelNO = #{specModelno}
+    </select>
+    
+    <select id="selectProSpecificationById" parameterType="Long" resultMap="ProSpecificationResult">
+        <include refid="selectProSpecificationVo"/>
+        where spec_id = #{specId}
+    </select>
+        
+    <insert id="insertProSpecification" parameterType="ProSpecification" useGeneratedKeys="true" keyProperty="specId">
+        insert into pro_specification
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specClass != null and specClass != ''">spec_class,</if>
+            <if test="specModelno != null and specModelno != ''">spec_modelNO,</if>
+            <if test="specDescribesC != null">spec_describes_C,</if>
+            <if test="specDescribesE != null">spec_describes_E,</if>
+            <if test="specIntroduceC != null">spec_introduce_C,</if>
+            <if test="specIntroduceE != null">spec_introduce_E,</if>
+            <if test="specCharactorC != null">spec_charactor_C,</if>
+            <if test="specCharactorE != null">spec_charactor_E,</if>
+            <if test="specSpecProcessor != null">spec_spec_Processor,</if>
+            <if test="specSpecChipset != null">spec_spec_Chipset,</if>
+            <if test="specSpecMemory != null">spec_spec_Memory,</if>
+            <if test="specSpecStorage != null">spec_spec_Storage,</if>
+            <if test="specSpecDisplay != null">spec_spec_Display,</if>
+            <if test="specSpecEthernet != null">spec_spec_Ethernet,</if>
+            <if test="specSpecAudio != null">spec_spec_Audio,</if>
+            <if test="specSpecBios != null">spec_spec_BIOS,</if>
+            <if test="specSpecExternalio != null">spec_spec_ExternalIO,</if>
+            <if test="specSpecInternalio != null">spec_spec_InternalIO,</if>
+            <if test="specSpecExpansion != null">spec_spec_Expansion,</if>
+            <if test="specSpecEnvironment != null">spec_spec_Environment,</if>
+            <if test="specSpecPower != null">spec_spec_Power,</if>
+            <if test="specSpecDimension != null">spec_spec_Dimension,</if>
+            <if test="specSpecTpm != null">spec_spec_TPM,</if>
+            <if test="specSpecOs != null">spec_spec_OS,</if>
+            <if test="specSpecSystem != null">spec_spec_System,</if>
+            <if test="specSpecMechanical != null">spec_spec_Mechanical,</if>
+            <if test="specSpecTouchscreen != null">spec_spec_Touchscreen,</if>
+            <if test="specSpecCea != null">spec_spec_CEA,</if>
+            <if test="specSpecSafety != null">spec_spec_Safety,</if>
+            <if test="specConfiguration != null">spec_configuration,</if>
+            <if test="specOrdering != null">spec_ordering,</if>
+            <if test="specPsC != null">spec_ps_C,</if>
+            <if test="specPsE != null">spec_ps_E,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="specClass != null and specClass != ''">#{specClass},</if>
+            <if test="specModelno != null and specModelno != ''">#{specModelno},</if>
+            <if test="specDescribesC != null">#{specDescribesC},</if>
+            <if test="specDescribesE != null">#{specDescribesE},</if>
+            <if test="specIntroduceC != null">#{specIntroduceC},</if>
+            <if test="specIntroduceE != null">#{specIntroduceE},</if>
+            <if test="specCharactorC != null">#{specCharactorC},</if>
+            <if test="specCharactorE != null">#{specCharactorE},</if>
+            <if test="specSpecProcessor != null">#{specSpecProcessor},</if>
+            <if test="specSpecChipset != null">#{specSpecChipset},</if>
+            <if test="specSpecMemory != null">#{specSpecMemory},</if>
+            <if test="specSpecStorage != null">#{specSpecStorage},</if>
+            <if test="specSpecDisplay != null">#{specSpecDisplay},</if>
+            <if test="specSpecEthernet != null">#{specSpecEthernet},</if>
+            <if test="specSpecAudio != null">#{specSpecAudio},</if>
+            <if test="specSpecBios != null">#{specSpecBios},</if>
+            <if test="specSpecExternalio != null">#{specSpecExternalio},</if>
+            <if test="specSpecInternalio != null">#{specSpecInternalio},</if>
+            <if test="specSpecExpansion != null">#{specSpecExpansion},</if>
+            <if test="specSpecEnvironment != null">#{specSpecEnvironment},</if>
+            <if test="specSpecPower != null">#{specSpecPower},</if>
+            <if test="specSpecDimension != null">#{specSpecDimension},</if>
+            <if test="specSpecTpm != null">#{specSpecTpm},</if>
+            <if test="specSpecOs != null">#{specSpecOs},</if>
+            <if test="specSpecSystem != null">#{specSpecSystem},</if>
+            <if test="specSpecMechanical != null">#{specSpecMechanical},</if>
+            <if test="specSpecTouchscreen != null">#{specSpecTouchscreen},</if>
+            <if test="specSpecCea != null">#{specSpecCea},</if>
+            <if test="specSpecSafety != null">#{specSpecSafety},</if>
+            <if test="specConfiguration != null">#{specConfiguration},</if>
+            <if test="specOrdering != null">#{specOrdering},</if>
+            <if test="specPsC != null">#{specPsC},</if>
+            <if test="specPsE != null">#{specPsE},</if>
+         </trim>
+    </insert>
+
+    <update id="updateProSpecification" parameterType="ProSpecification">
+        update pro_specification
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="specModelno != null and specModelno != ''">spec_modelNO = #{specModelno},</if>
+            <if test="specClass != null and specClass != ''">spec_class = #{specClass},</if>
+            <if test="specDescribesC != null">spec_describes_C = #{specDescribesC},</if>
+            <if test="specDescribesE != null">spec_describes_E = #{specDescribesE},</if>
+            <if test="specIntroduceC != null">spec_introduce_C = #{specIntroduceC},</if>
+            <if test="specIntroduceE != null">spec_introduce_E = #{specIntroduceE},</if>
+            <if test="specCharactorC != null">spec_charactor_C = #{specCharactorC},</if>
+            <if test="specCharactorE != null">spec_charactor_E = #{specCharactorE},</if>
+            <if test="specSpecProcessor != null">spec_spec_Processor = #{specSpecProcessor},</if>
+            <if test="specSpecChipset != null">spec_spec_Chipset = #{specSpecChipset},</if>
+            <if test="specSpecMemory != null">spec_spec_Memory = #{specSpecMemory},</if>
+            <if test="specSpecStorage != null">spec_spec_Storage = #{specSpecStorage},</if>
+            <if test="specSpecDisplay != null">spec_spec_Display = #{specSpecDisplay},</if>
+            <if test="specSpecEthernet != null">spec_spec_Ethernet = #{specSpecEthernet},</if>
+            <if test="specSpecAudio != null">spec_spec_Audio = #{specSpecAudio},</if>
+            <if test="specSpecBios != null">spec_spec_BIOS = #{specSpecBios},</if>
+            <if test="specSpecExternalio != null">spec_spec_ExternalIO = #{specSpecExternalio},</if>
+            <if test="specSpecInternalio != null">spec_spec_InternalIO = #{specSpecInternalio},</if>
+            <if test="specSpecExpansion != null">spec_spec_Expansion = #{specSpecExpansion},</if>
+            <if test="specSpecEnvironment != null">spec_spec_Environment = #{specSpecEnvironment},</if>
+            <if test="specSpecPower != null">spec_spec_Power = #{specSpecPower},</if>
+            <if test="specSpecDimension != null">spec_spec_Dimension = #{specSpecDimension},</if>
+            <if test="specSpecTpm != null">spec_spec_TPM = #{specSpecTpm},</if>
+            <if test="specSpecOs != null">spec_spec_OS = #{specSpecOs},</if>
+            <if test="specSpecSystem != null">spec_spec_System = #{specSpecSystem},</if>
+            <if test="specSpecMechanical != null">spec_spec_Mechanical = #{specSpecMechanical},</if>
+            <if test="specSpecTouchscreen != null">spec_spec_Touchscreen = #{specSpecTouchscreen},</if>
+            <if test="specSpecCea != null">spec_spec_CEA = #{specSpecCea},</if>
+            <if test="specSpecSafety != null">spec_spec_Safety = #{specSpecSafety},</if>
+            <if test="specConfiguration != null">spec_configuration = #{specConfiguration},</if>
+            <if test="specOrdering != null">spec_ordering = #{specOrdering},</if>
+            <if test="specPsC != null">spec_ps_C = #{specPsC},</if>
+            <if test="specPsE != null">spec_ps_E = #{specPsE},</if>
+        </trim>
+        where spec_id = #{specId}
+    </update>
+
+    <delete id="deleteProSpecificationById" parameterType="Long">
+        delete from pro_specification where spec_id = #{specId}
+    </delete>
+
+    <delete id="deleteProSpecificationByIds" parameterType="String">
+        delete from pro_specification where spec_id in 
+        <foreach item="specId" collection="array" open="(" separator="," close=")">
+            #{specId}
+        </foreach>
+    </delete>
+
+</mapper>
